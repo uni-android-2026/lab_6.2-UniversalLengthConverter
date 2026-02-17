@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -8,12 +9,216 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/title"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="16dp"
+        android:text="Конвертер длины"
+        android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/inputBlock"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Введите значение:"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/inputValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="например 12.5"
+            android:inputType="numberDecimal|numberSigned"
+            android:importantForAutofill="no"
+            android:padding="12dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Единица измерения:"
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/unitSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnConvert"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Перевести" />
+
+            <Button
+                android:id="@+id/btnClear"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:text="Очистить" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/errorText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="#B00020"
+            android:textSize="14sp"
+            android:visibility="gone"
+            tools:text="Ошибка: введите число" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/resultsScroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="12dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inputBlock">
+
+        <LinearLayout
+            android:id="@+id/resultsBlock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Результаты:"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Таблица результатов: 9 строк -->
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:stretchColumns="1">
+
+                <TableRow>
+                    <TextView
+                        android:padding="6dp"
+                        android:text="мм" />
+                    <TextView
+                        android:id="@+id/outMm"
+                        android:padding="6dp"
+                        android:text="-" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:padding="6dp"
+                        android:text="см" />
+                    <TextView
+                        android:id="@+id/outCm"
+                        android:padding="6dp"
+                        android:text="-" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:padding="6dp"
+                        android:text="м" />
+                    <TextView
+                        android:id="@+id/outM"
+                        android:padding="6dp"
+                        android:text="-" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:padding="6dp"
+                        android:text="км" />
+                    <TextView
+                        android:id="@+id/outKm"
+                        android:padding="6dp"
+                        android:text="-" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:padding="6dp"
+                        android:text="дюйм" />
+                    <TextView
+                        android:id="@+id/outInch"
+                        android:padding="6dp"
+                        android:text="-" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:padding="6dp"
+                        android:text="фут" />
+                    <TextView
+                        android:id="@+id/outFoot"
+                        android:padding="6dp"
+                        android:text="-" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:padding="6dp"
+                        android:text="ярд" />
+                    <TextView
+                        android:id="@+id/outYard"
+                        android:padding="6dp"
+                        android:text="-" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:padding="6dp"
+                        android:text="морская миля" />
+                    <TextView
+                        android:id="@+id/outNauticalMile"
+                        android:padding="6dp"
+                        android:text="-" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:padding="6dp"
+                        android:text="световой год" />
+                    <TextView
+                        android:id="@+id/outLightYear"
+                        android:padding="6dp"
+                        android:text="-" />
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
